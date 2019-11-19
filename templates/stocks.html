@@ -1,0 +1,104 @@
+{% extends "newheader.html" %}
+
+{% block body %}
+<ul class="list-inline">
+<li>
+<div class="dropdown">
+  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Filter By Sector
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    {% for se in sectors %}
+    {% if se[0]|length > 0 %}
+    {% if offset > 0 %}
+    <a class="dropdown-item" href="/Stocks/{{ 0 }}/{{ se[0] }}/{{ costFilter }}" style="color:black;">{{ se[0] }}</a><br>
+    {% else %}
+    <a class="dropdown-item" href="/Stocks/{{ 0 }}/{{ se[0] }}/{{ costFilter }}" style="color:black;">{{ se[0] }}</a><br>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+</li>
+<li>
+<div class="dropdown">
+  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Filter By Price
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="font-size: 16px;">
+    <a class="dropdown-item" href="/Stocks/{{ 0 }}/{{ sectorFilter }}/{{ 50 }}" style="color: black;">>50</a><br>
+    <a class="dropdown-item" href="/Stocks/{{ 0 }}/{{ sectorFilter }}/{{ 100 }}" style="color: black;">>100</a><br>
+    <a class="dropdown-item" href="/Stocks/{{ 0 }}/{{ sectorFilter }}/{{ 200 }}" style="color: black;">>200</a><br>
+    <a class="dropdown-item" href="/Stocks/{{ 0 }}/{{ sectorFilter }}/{{ 500 }}" style="color: black;">>500</a><br>
+    <a class="dropdown-item" href="/Stocks/{{ 0 }}/{{ sectorFilter }}/{{ 1000 }}" style="color: black;">>1000</a><br>
+    <a class="dropdown-item" href="/Stocks/{{ 0 }}/{{ sectorFilter }}/{{ 2000 }}" style="color: black;">>2000</a><br>
+    <a class="dropdown-item" href="/Stocks/{{ 0 }}/{{ sectorFilter }}/{{ 5000 }}" style="color: black;">>5000</a><br>
+    <a class="dropdown-item" href="/Stocks/{{ 0 }}/{{ sectorFilter }}/{{ 10000 }}" style="color: black;">>10000</a><br>
+  </div>
+</div>
+</li>
+</ul>
+<table class="table table-hover" style="background-color: rgba(255, 255, 255, 1); font-family: Arial; margin-top: 4%;">
+  <thead>
+    <tr>
+      <th scope="col">Company ID</th>
+      <th scope="col">Company</th>
+      <th scope="col">Timestamp </th>
+      <th scope="col">Open</th>
+      <th scope="col">High</th>
+      <th scope="col">Low</th>
+      <th scope="col">Last</th>
+      <th scope="col">Close</th>
+      <th scope="col">Aggregate Qty.</th>
+      <th scope="col">Turnover</th>
+      <th scope="col">Sector</th>
+      <th scope="col">Industry</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for count in range(offset, offset+25) %}
+    {% if count < length %}
+      <tr>
+        <td><a href="/company/{{data[count][1]}} " style="text-decoration: none;">{{ data[count][1] }}</a></td>
+        <td>{{ data[count][0] }}</td>
+        <td>{{ data[count][2] }}</td>
+        <td>{{ data[count][3] }}</td>
+        <td>{{ data[count][4] }}</td>
+        <td>{{ data[count][5] }}</td>
+        <td>{{ data[count][6] }}</td>
+        <td>{{ data[count][7] }}</td>
+        <td>{{ data[count][8] }}</td>
+        <td>{{ data[count][9] }}</td>
+        <td>{{ data[count][10] }}</td>
+        <td>{{ data[count][11] }}</td>
+      </tr>
+    {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+{% if sectorFilter|length > 0 %}
+{% if length < 25 %}
+<a href='/Stocks/{{ offset-25 }}/{{ sectorFilter}}/{{ costFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; margin-top: 10px; margin-left: 81%; margin-top: 10px; opacity: 0;">&lt;&lt;Prev 25</a>
+<a href='/Stocks/{{ offset+25 }}/{{ sectorFilter}}/{{ costFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; opacity : 0;">&nbsp;Next 25 >></a>
+{% elif offset >= 25 and offset+25 < length %}
+<a href='/Stocks/{{ offset-25 }}/{{ sectorFilter}}/{{ costFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; margin-top: 10px; margin-left: 81%; margin-top: 10px;">&lt;&lt;Prev 25</a>
+<a href='/Stocks/{{ offset+25 }}/{{ sectorFilter}}/{{ costFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; ">&nbsp;Next 25 >></a>
+{% elif offset < 25 %}
+<a href='/Stocks/{{ offset+25 }}/{{ sectorFilter}}/{{ costFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; margin-left: 87%; margin-top: 10px;">Next 25 >></a>
+{% elif offset+ 25 > length %}
+<a href='/Stocks/{{ offset-25 }}/{{ sectorFilter}}/{{ costFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; margin-top: 10px; margin-left: 87%; margin-top: 10px;">&lt;&lt;Prev 25</a>
+{% endif %}
+{% else %}
+{% if length < 25 %}
+<a href='/Stocks/{{ offset-25 }}/{{ costFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; margin-top: 10px; margin-left: 81%; margin-top: 10px; opacity: 0;">&lt;&lt;Prev 25</a>
+<a href='/Stocks/{{ offset+25 }}/{{ costFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; opacity : 0;">&nbsp;Next 25 >></a>
+{% elif offset >= 25 and offset+25 < length %}
+<a href='/Stocks/{{ offset-25 }}/{{ costFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; margin-top: 10px; margin-left: 81%; margin-top: 10px;">&lt;&lt;Prev 25</a>
+<a href='/Stocks/{{ offset+25 }}/{{ costFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; ">&nbsp;Next 25 >></a>
+{% elif offset < 25 %}
+<a href='/Stocks/{{ offset+25 }}/{{ costFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; margin-left: 87%; margin-top: 10px;">Next 25 >></a>
+{% elif offset+ 25 > length %}
+<a href='/Stocks/{{ offset-25 }}/{{ costFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; margin-top: 10px; margin-left: 87%; margin-top: 10px;">&lt;&lt;Prev 25</a>
+{% endif %}
+{% endif %}
+{% endblock %}

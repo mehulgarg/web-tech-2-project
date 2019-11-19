@@ -1,0 +1,44 @@
+{% extends "newheader.html" %}
+{% block body %}
+			<br><br>
+		{% from "form_utils.html" import render_field %}
+		<form action="/profile_mfunds" style="position: relative; left: 40%; color: white;" method="POST">
+			<label style="position: relative; left: 40px">Add an Investment</label>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.fund_code)}}
+			</div>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.start_date)}}
+			</div>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.price)}}
+			</div>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.qty)}}
+			</div class="form-group" style="width: 200px">
+				{{render_field(form.submit)}}
+			<div>
+				
+			</div>
+		</form>
+		<div style="position: relative; top:100px; width: 100%">
+			<h4 align="middle">YOUR INVESTMENTS</h4>
+			<table class="table table-hover" style="background-color: white;">
+				<tr >
+				    <td><strong>FUND</strong></td>
+				    <td><strong>DATE OF PURCHASE</strong></td>
+				    <td><strong>PRICE PER UNIT</strong></td>
+				    <td><strong>QUANTITY</strong></td>
+				   
+				</tr>
+			{% for item in data %}
+				<tr >
+				    <td>{{item[0]}}</td>
+				    <td>{{item[1]}}</td>
+				    <td>{{item[2]}}</td>
+				    <td>{{item[3]}}</td>
+				</tr>
+			{% endfor %}
+		</table>	
+		</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "newheader.html" %}
+{% block body %}
+			<br><br>
+		{% from "form_utils.html" import render_field %}
+		<form action="/profile_loan" style="position: relative; left: 40%; color: white;" method="POST">
+			<label style="position: relative; left: 40px">Add an Investment</label>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.loan_type)}}
+			</div>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.loan_amount)}}
+			</div>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.start_date)}}
+			</div>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.tenure)}}
+			</div>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.loan_balance)}}
+			</div>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.emis_to_pay)}}
+			</div>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.bank_name)}}
+			</div>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.submit)}}
+			</div>
+		</form>
+		<div style="position: relative; top:100px; width: 100%">
+			{% for i in l%}
+				<h3>EMI due for {{i[1]}} Loan</h3>
+			{% endfor %}
+			<h4 align="middle">YOUR LOANS</h4>
+			<table class="table table-hover" style="background-color: white;">
+				<tr>
+				    <td><strong>Loan Type</strong></td>
+				    <td><strong>Loan Amount</strong></td>
+				    <td><strong>Date</strong></td>
+				    <td><strong>Tenure</strong></td>
+				    <td><strong>EMIs Left</strong></td>
+				    <td><strong>Bank</strong></td>
+				    <td><strong>Loan Balance</strong></td>
+				</tr>
+			{% for item in data %}
+				<tr>
+				    <td>{{item[1]}}</td>
+				    <td>{{item[2]}}</td>
+				    <td>{{item[3]}}</td>
+				    <td>{{item[4]}}</td>
+				    <td>{{item[6]}}</td>
+				    <td>{{item[7]}}</td>
+				    <td>{{item[5]}}</td>
+				</tr>
+			{% endfor %}
+		</table>
+		</div>
+
+{% endblock %}

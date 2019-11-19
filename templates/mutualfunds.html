@@ -1,0 +1,55 @@
+{% extends "newheader.html" %}
+{% block body %}
+<div class="dropdown">
+  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Filter By Price
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="font-size: 16px;">
+    <a class="dropdown-item" href="/mutualfunds/{{ 0 }}/{{ 5 }}" style="color: black;">>5</a><br>
+    <a class="dropdown-item" href="/mutualfunds/{{ 0 }}/{{ 10 }}" style="color: black;">>10</a><br>
+    <a class="dropdown-item" href="/mutualfunds/{{ 0 }}/{{ 20 }}" style="color: black;">>20</a><br>
+    <a class="dropdown-item" href="/mutualfunds/{{ 0 }}/{{ 50 }}" style="color: black;">>50</a><br>
+    <a class="dropdown-item" href="/mutualfunds/{{ 0 }}/{{ 100 }}" style="color: black;">>100</a><br>
+    <a class="dropdown-item" href="/mutualfunds/{{ 0 }}/{{ 200 }}" style="color: black;">>200</a><br>
+    </div>
+</div>
+<table class="table table-hover" style="background-color: rgba(255, 255, 255, 1); font-family: Arial; margin-top: 4%;">
+  <thead>
+    <tr>
+      <th scope="col">Fund Code</th>
+      <th scope="col">Fund Name</th>
+      <th scope="col">Timestamp </th>
+      <th scope="col">Price</th>
+      <th scope="col" class="text-center">Three Month Return</th>
+      <th scope="col" class="text-center">Year To Date Return</th>
+      <th scope="col">Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for count in range(offset, offset+25) %}
+    {% if count < length %}
+      <tr>
+        <td>{{ data[count][0] }}</a></td>
+        <td>{{ data[count][1] }}</td>
+        <td>{{ data[count][2] }}</td>
+        <td>{{ data[count][3] }}</td>
+        <td class="text-center">{{ data[count][4] }}</td>
+        <td class="text-center">{{ data[count][5] }}</td>
+        <td>{{ data[count][6] }}</td>
+      </tr>
+    {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+ {% if length < 25 %}
+<a href='/mutualfunds/{{ offset-25 }}/{{ priceFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; margin-top: 10px; margin-left: 81%; margin-top: 10px; opacity: 0;">&lt;&lt;Prev 25</a>
+<a href='/mutualfunds/{{ offset+25 }}/{{ priceFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; opacity : 0;">&nbsp;Next 25 >></a>
+{% elif offset >= 25 and offset+25 < length %}
+<a href='/mutualfunds/{{ offset-25 }}/{{ priceFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; margin-top: 10px; margin-left: 81%; margin-top: 10px;">&lt;&lt;Prev 25</a>
+<a href='/mutualfunds/{{ offset+25 }}/{{ priceFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; ">&nbsp;Next 25 >></a>
+{% elif offset < 25 %}
+<a href='/mutualfunds/{{ offset+25 }}/{{ priceFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; margin-left: 87%; margin-top: 10px;">Next 25 >></a>
+{% elif offset+ 25 > length %}
+<a href='/mutualfunds/{{ offset-25 }}/{{ priceFilter }}' style="text-decoration: none; color: black; font-size: 25px; font-family: Arial; margin-top: 10px; margin-left: 87%; margin-top: 10px;">&lt;&lt;Prev 25</a>
+{% endif %}
+{% endblock %}

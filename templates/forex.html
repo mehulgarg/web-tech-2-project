@@ -1,0 +1,43 @@
+{% extends "newheader.html" %}
+{% block body %}
+<ul class="list-inline">
+  {% if forex %}
+<li style="max-height: 500px; overflow-y: scroll;">
+  <table class="table table-hover" style="background-color: rgba(255, 255, 255, 1); font-family: Arial; margin-top: 4%;">
+    <thead>
+      <tr>
+        <th scope="col">Code</th>
+        <th scope="col">Country</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for key, value  in forex.items() %}
+        <tr>
+          <td>{{ key }}</td>
+          <td>{{ value }}
+        </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+  {% endif %}
+</li>
+<li style="margin-left: 50%; margin-top: -50%;">
+  <form class="form-inline" style="margin-top: -50%;" method="post" action="">
+  <div class="form-group">
+    <input type="text" class="form-control" id="exampleInputName2" placeholder="Currency 1" name="cur1" value = "{{request.form.cur1}}">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Currency 2" name="cur2" value = "{{request.form.cur2}}">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Base" name="base" value = "{{request.form.base}}">
+  </div>
+  <button type="submit" class="btn btn-primary">Plot Graph</button>
+</form>
+</li>
+</ul>
+{% if graph_data %}
+<embed type = "image/svg+xml" src = {{graph_data|safe}} style = "max-width:100opx;"/>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,67 @@
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <title>Fiancial Portfolio</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <meta property="og:title" content="">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="">
+	<meta property="og:site_name" content="">
+	<meta property="og:description" content="">
+
+  <link href='//fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900|Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <style media="screen">
+    body{
+      background-image: url("{{ url_for('static', filename = 'img/snow.jpg') }}");
+      font-family: 'Raleway', sans-serif;
+      color: white;
+    }
+    h1{
+      margin-top: 10%;
+    }
+  </style>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-info alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {{ message }}
+        </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <div class="jumbotron jumbotron-fluid" style="background-color : rgba(0, 0, 0, 0)">
+      <div class="container">
+        <h1 class="display-1 animated fadeInUp">Financial Portfolio</h1>
+        <p class="display-2 animated fadeInUp"><h2>Login to Continue</h2></p>
+      </div>
+    </div>
+    <form action="" method="post">
+      <div class="form-group align-items center" style="width: 35%; margin-left: 20%">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control animated fadeInUp" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email" value="{{ request.form.email }}">
+        <small id="emailHelp" class="form-text animated fadeInUp">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group" style="width: 35%; margin-left: 20%">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control animated fadeInUp" id="exampleInputPassword1" placeholder="Password" name="password" value="{{ request.form.password }}">
+      </div>
+      <div class="btn-group" style="margin-left: 20%;">
+        <button type="submit" class="btn btn-primary animated fadeInUp">Submit</button>
+        <button class="btn btn-primary animated fadeInUp" style="margin-left: 4%;"><a href="/register/" style="text-decoration: none; color: white" >Not a Memmber? Register</a></button>
+      </div>
+    </form>
+    {% if error %}
+    <div class="p-3 mb-2 bg-danger text-white">{{ error }}</div>
+    {% endif %}
+  </body>
+</html>

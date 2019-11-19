@@ -1,0 +1,86 @@
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <title>Fiancial Portfolio</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <meta property="og:title" content="">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="">
+	<meta property="og:site_name" content="">
+	<meta property="og:description" content="">
+
+  <link href='//fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900|Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <style media="screen">
+    body{
+      background-image: url("{{ url_for('static', filename = 'img/snow.jpg') }}");
+      font-family: 'Raleway', sans-serif;
+      color: white;
+    }
+    h1{
+      margin-top: 20%;
+    }
+  </style>
+  </head>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light" style ="background-color: rgba(0, 0, 0, 0);">
+  <a class="navbar-brand" href="/homepage/">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    {% if session.logged_in %}
+      <div class="btn-group" role="group" aria-label="Basic example" style="padding-left: 2%;">
+        <button type="button" class="btn" style="background-color : rgba(38, 166, 154, 0.7)"><a href="/profile/"style="text-decoration: none; color: white;">LOLZ</a></button>
+        <button type="button" class="btn" style="background-color : rgba(224, 242, 241, 0.7)"><a href="/logout/" style="text-decoration: none;color: white">Logout</a></button>
+      </div>
+    {% endif %}
+  </div>
+</nav>
+</header>
+<body>
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src = "{{ url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+      </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  {% block body %}
+  {% endblock %}
+</html>

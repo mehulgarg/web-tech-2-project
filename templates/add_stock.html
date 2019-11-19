@@ -1,0 +1,101 @@
+{% extends "newheader.html" %}
+{% block body %}
+			<br><br>
+
+		{% from "form_utils.html" import render_field %}
+		<form action="/profile_stocks" style="width:250px;position: relative; left: 40%;" method="POST">
+			<label style="position: relative; left: 40px">Add an Investment</label>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.company)}}
+			</div>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.quantity)}}
+			</div>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.price)}}
+			</div>
+			<div class="form-group" style="width: 200px">
+				{{render_field(form.date)}}
+			</div class="form-group" style="width: 200px">
+				{{render_field(form.submit)}}
+			<div>
+				
+			</div>
+		</form>
+
+		<div class='text-center' style="color: white">
+			{% if(top) %}
+			<h2>TOP PERFORMING SECTOR:</h2>
+			<h3>{{top[0][0]}}</h3>
+			{% endif %}
+		</div>
+		<div class='text-center' style="color: white">
+			{% if(worst) %}
+			<h2>WORST PERFORMING SECTOR:</h2>
+			<h3>{{worst[0][0]}}</h3>
+			{% endif %}
+		</div>
+		<div style="position: relative; top:100px; width: 100%">
+			<h4 align="middle" style="color: white">YOUR SHARES</h4>
+			<table class="table table-hover" style="background-color: rgba(255, 255, 255, 1)" >
+				<tr >
+				    <td><strong>Company</strong></td>
+				    <td><strong>Date of Purchase</strong></td>
+				    <td><strong>Price per Share</strong></td>
+				    <td><strong>Quantity</strong></td>
+				    <td><strong>Price</strong></td>
+				    <td><strong>Change</strong></td>
+				    <td><strong>Value</strong></td>
+				</tr>
+			{% for item in data %}
+				<tr >
+				    <td><a href = '/company/{{item[0]}}' style="text-decoration: none;">{{ item[0]}}</a></td>
+				    <td>{{item[1]}}</td>
+				    <td>{{item[2]}}</td>
+				    <td>{{item[3]}}</td>
+				    <td>{{item[4]}}</td>
+				    <td>{{item[5]}}</td>
+				    <td>{{item[6]}}</td>
+				</tr>
+			{% endfor %}
+		</table>
+		<br><br>
+		<h4 align="middle" style="color: white">TOP PICKS FOR YOU</h4>
+		<table class="table table-hover" style="background-color: rgba(255, 255, 255, 1)" >
+				<tr >
+				    <td><strong>Company</strong></td>
+				    <td><strong>Company ID</strong></td>
+				    <td><strong>Open</strong></td>
+				    <td><strong>Change</strong></td>
+				    
+				</tr>
+			{% for item in rec %}
+				<tr >
+				    <td><a href = '/company/{{item[0]}}' style="text-decoration: none;">{{ item[0]}}</a></td>
+				    <td>{{item[1]}}</td>
+				    <td>{{item[2]}}</td>
+				    <td>{{item[3]}}</td>
+				</tr>
+			{% endfor %}
+		</table>
+		<br><br>
+		<h4 align="middle" style="color: white">TOP PICKS FROM OTHER USERS</h4>
+		<table class="table table-hover" style="background-color: rgba(255, 255, 255, 1);">
+				<tr >
+				    <td><strong>Company</strong></td>
+				    <td><strong>Company ID</strong></td>
+				    <td><strong>Open</strong></td>
+				    <td><strong>Change</strong></td>
+				</tr>
+			{% for item in rec_other %}
+				<tr>
+				    <td><a href = '/company/{{item[0]}}' style="text-decoration: none;">{{ item[0]}}</a></td>
+				    <td>{{item[1]}}</td>
+				    <td>{{item[2]}}</td>
+				    <td>{{item[3]}}</td>
+				    <td>{{item[4]}}</td>
+				</tr>
+			{% endfor %}
+		</table>
+		</div>
+{% endblock %}

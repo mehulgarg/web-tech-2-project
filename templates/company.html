@@ -1,0 +1,42 @@
+{% extends "newheader.html" %}
+{% block body %}
+
+<div class="container">
+  <h2>{{ company_data[0][0] }}</h2>
+  <small>NSE NSE Real Time Price. Currency INR</small>
+</div>
+<ul class="list-inline" style="margin-top: 5%;">
+  <li>
+    <table class="table table-hover" style="background-color: rgba(255, 255, 255, 1); font-family: Arial; margin-top: 4%;">
+      <tbody>
+          <tr>
+            <td><strong>Timestamp:&nbsp;</strong> {{ company_data[0][2] }}</td>
+          </tr>
+          <tr>
+            <td><strong>Open:&nbsp;</strong>{{ company_data[0][3] }}</td>
+          </tr>
+          <tr>
+            <td><strong>High:&nbsp;</strong>{{ company_data[0][4] }}</td>
+          </tr>
+          <tr>
+            <td><strong>Low:&nbsp;</strong>{{ company_data[0][5] }}</td>
+          </tr>
+          <tr>
+            <td><strong>Last:&nbsp;</strong>{{ company_data[0][6] }}</td>
+          </tr>
+          <tr>
+            <td><strong>Close:&nbsp;</strong>{{ company_data[0][7] }}</td>
+          </tr>
+          <tr>
+            <td><strong>Total Trade Quantity:&nbsp;</strong>{{ company_data[0][8] }}</td>
+          </tr>
+          <tr>
+            <td><strong>Turnover:&nbsp;</strong>{{ company_data[0][9] }}</td>
+          </tr>
+      </tbody>
+    </table>
+  </li>
+    <embed type = "image/svg+xml" src = {{graph_data|safe}} style = "max-width:1000px;"/>
+  </li>
+</ul>
+{% endblock %}

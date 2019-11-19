@@ -1,0 +1,32 @@
+{% extends "newheader.html" %}
+{% block body %}
+    <div style="position: relative;left: 30%">
+        <button type="button" class="btn btn-default"><a href="/profile_stocks">My Shares</a></button>
+        <button type="button" class="btn btn-default"><a href="/profile_mfunds">My Mutual Funds</a></button>
+        <button type="button" class="btn btn-default"><a href="/profile_loan">My Loans</a></button>
+        <button type="button" class="btn btn-default"><a href="/delete/">Delete My Account</a></button>
+    </div>
+    <h3>NET WORTH</h3>
+    <h3>{{nworth[0][0]}} INR</h3>
+    <div style="position: relative; top:100px; width: 100%">
+			<h4 align="middle">MOST ACTIVE TODAY</h4>
+			<table class="table table-hover" style="background-color: white; font-family: Arial;" >
+				<tr >
+				    <td><strong>Company ID</strong></td>
+				    <td><strong>Company</strong></td>
+				    <td><strong>Open</strong></td>
+				    <td><strong>Change</strong></td>
+				    <td><strong>Trade Quantity</strong></td>
+				</tr>
+			{% for item in data %}
+				<tr>
+				    <td><a href="/company/{{item[0]}}">{{item[0]}}</a></td>
+				    <td>{{item[1]}}</td>
+				    <td>{{item[2]}}</td>
+				    <td>{{item[3]}}</td>
+				    <td>{{item[4]}}</td>
+				</tr>
+			{% endfor %}
+			</table>
+	</div>
+{% endblock %}
